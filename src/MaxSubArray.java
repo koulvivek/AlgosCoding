@@ -9,16 +9,27 @@ the largest sum and return its sum.
 public class MaxSubArray {
 
     public static int maxSubArray(int[] nums) {
-        int max_sum=nums[0];
-        int current_sum=max_sum;
+
+        // current sum..
+        int csum=nums[0];
+        // overall sum
+        int osum= nums[0];
         // using kadane's algorithm with O(n) complexity
         // can be done via brute forec but this is more like DP.
+        // attach to the previous sequence if its greater than greater than you otherwise forma  new sequence
 
-        for(int i=1; i<nums.length;i++){
-            current_sum=Math.max(nums[i]+current_sum,nums[i]);
-            max_sum=Math.max(current_sum,max_sum);
+        for(int i=0;i<nums.length;i++){
+            if(csum >= 0){
+                csum +=nums[i];
+            }
+            else{
+                csum=nums[i];
+            }
+            if(csum > osum){
+                osum=csum;
+            }
         }
-        return max_sum;
+    return osum;
     }
     public static void main(String args[])
     {
